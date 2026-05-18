@@ -8582,3 +8582,5 @@ CONFIG_PACKAGE_whereis=y
 # end of Xorg
 
 CONFIG_PACKAGE_luci-app-qmodem=y
+CONFIG_PACKAGE_luci-compat=y
+CONFIG_PACKAGE_tinyfm=y
