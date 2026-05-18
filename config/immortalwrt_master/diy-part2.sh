@@ -49,7 +49,27 @@ fi
 rm -rf package/luci-app-amlogic
 git clone -b main https://github.com/ophub/luci-app-amlogic.git package/luci-app-amlogic
 
-# (Bagian QModem di bawahnya sudah dihapus)
+# 1. Mengubah Hostname (Nama Router)
+sed -i 's/ImmortalWrt/KrstwnWRTx/g' package/base-files/files/bin/config_generate
+sed -i 's/OpenWrt/KrstwnWRTx/g' package/base-files/files/bin/config_generate
+
+# 2. Menambahkan Nama di Tampilan Terminal (Banner SSH)
+echo "   -----------------------------------------------------" >> package/base-files/files/etc/banner
+echo "           Build by Krstwnn | OpenWrt Amlogic          " >> package/base-files/files/etc/banner
+echo "   -----------------------------------------------------" >> package/base-files/files/etc/banner
+
+# 3. Mengubah Password Default Root
+# (Membuat script yang akan otomatis berjalan saat router pertama kali dinyalakan)
+mkdir -p package/base-files/files/etc/uci-defaults
+cat << 'EOF' > package/base-files/files/etc/uci-defaults/99-custom-pass
+#!/bin/sh
+echo -e "root\nroot" | passwd root
+exit 0
+EOF
+
+# 4. Menambahkan nama builder di informasi versi LuCI
+sed -i 's/DISTRIB_DESCRIPTION="\(.*\)"/DISTRIB_DESCRIPTION="\1 by Krstwnn"/g' package/base-files/files/etc/openwrt_release
+
 # Apply patches
 # git apply ../config/patches/{0001*,0002*}.patch --directory=feeds/luci
 #
