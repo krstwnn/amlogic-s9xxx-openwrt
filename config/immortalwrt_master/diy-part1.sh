@@ -12,3 +12,5 @@
 # Remove unnecessary packages
 # rm -rf package/emortal/{autosamba,ipv6-helper}
 
+echo 'src-git modem_feeds https://github.com/FUjr/modem_feeds.git' >> feeds.conf.default
+
