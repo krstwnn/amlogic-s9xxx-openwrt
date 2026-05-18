@@ -388,6 +388,12 @@ jobs:
           REPO_NAME="${source_branch_input%_*}"
           REPO_BRANCH="${source_branch_input##*_}"
 
+          # --- HACK UNTUK VERSI 24.10 ---
+          if [[ "${{ inputs.source_branch }}" == "immortalwrt_master" ]]; then
+              REPO_BRANCH="openwrt-24.10"
+          fi
+          # ------------------------------
+
           # Clone the source code repository
           git clone -q --single-branch --depth=1 --branch=${REPO_BRANCH} ${REPO_URL} openwrt
           ln -sf /builder/openwrt ${{ github.workspace }}/openwrt
