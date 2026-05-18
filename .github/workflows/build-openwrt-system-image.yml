@@ -12,7 +12,7 @@ on:
       source_branch:
         description: "Select the source branch"
         required: false
-        default: "openwrt_main"
+        default: "immortalwrt_master"
         type: choice
         options:
           - openwrt_main
